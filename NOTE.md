@@ -2,6 +2,7 @@
 
 - Node.JS의 프레임 워크.
 - EXPRESS 위에서 작동한다.
+- EXPRESS 대신 Fastify를 사용할 수 있고 2배 빠르다.
 - 우리가 선호하는 아키텍처와 구조를 제공한다.
 
 ## NodeJS와 NestJS
@@ -46,3 +47,15 @@ express.js에서 하듯 수동으로 import하지 않는다.
 main.ts에 설정함. `app.useGlobalPipes( new ValidationPipe())`
 `npm i class-validator class-transformer` : DTO에 사용하는 라이브러리.
 `npm i @nestjs/mapped-trypes` : 타입을 변환시키고 사용하게 한다. nestjs에서 제작.
+
+---
+
+app.module은 AppController와 AppProvider만 가지고 있어야 한다.
+Movies의 모듈과 컨트롤러는 movies.module로 옮긴다.
+CLI 입력 : nest generate module || nest g mo
+
+그럼 AppController와 Provider는 언제 쓰나?
+CLI 입력 : nest generate module || nest g co
+이름을 app로 하면 만들어짐.
+
+---
