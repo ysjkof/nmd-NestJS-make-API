@@ -36,3 +36,13 @@ Single-responsibility principle : 하나의 module, class, function이 하나의
 Service : 로직을 관리하는 역할.
 
 CLI 입력 : nest generate service || nest g s
+express.js에서 하듯 수동으로 import하지 않는다.
+
+---
+
+데이터 전송 객체 Data Transfer Object.
+유효성 검사를 하기 위한 type을 부여하기 위해 service와 controller에서 DTO를 만든다.
+이것만 있으면 유효성 검사가 되진 않는다. PIPE( 미들웨어 같은 거다. )가 필요하다.
+main.ts에 설정함. `app.useGlobalPipes( new ValidationPipe())`
+`npm i class-validator class-transformer` : DTO에 사용하는 라이브러리.
+`npm i @nestjs/mapped-trypes` : 타입을 변환시키고 사용하게 한다. nestjs에서 제작.

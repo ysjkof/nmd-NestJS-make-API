@@ -9,6 +9,8 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -30,7 +32,7 @@ export class MoviesController {
   @Get(':id')
   // getOne에게 필요한 게 있어서 요청한다. URL에 파라미터 id를 찾고 싶다. @Param()으로 id를 요청한다.
   // NestJS는 요청하지 않으면 아무것도 return하지 않는다.
-  getOne(@Param('id') movieId: string): Movie {
+  getOne(@Param('id') movieId: number): Movie {
     const movie = this.moviesService.getOne(movieId);
     if (!movie) {
       // NestJS 내장 기능.
@@ -41,18 +43,18 @@ export class MoviesController {
 
   @Post()
   // @Body는 request의 body를 가져온다.
-  create(@Body() movieDate) {
+  create(@Body() movieDate: CreateMovieDto) {
     return this.moviesService.create(movieDate);
   }
 
   @Delete(':id')
-  remoev(@Param('id') movieId: string) {
+  remoev(@Param('id') movieId: number) {
     return this.moviesService.deleteOne(movieId);
   }
 
   // update 기능. put은 모든 리소스를 업데이트 한다. patch는 리소스의 일부만 업데이트한다.
   @Patch(':id')
-  patch(@Param('id') movieId: string, @Body() updateData) {
+  patch(@Param('id') movieId: number, @Body() updateData: UpdateMovieDto) {
     return this.moviesService.update(movieId, updateData);
   }
 }
