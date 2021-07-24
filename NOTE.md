@@ -25,7 +25,14 @@ Rest client. 이걸로 우리의 엔드포인트를 테스트할 것.
 
 ---
 
-controller : express의 router 같은 것. URL가져오고 함수를 실행.
+controller : express의 router 같은 것. URL가져오고 함수를 실행. request를 받고, query나 body 등을 넘기는 역할.
 CLI 입력 : nest generate controller || nest g co => 이름을 입력하면 컨트롤러와 spec( 테스트 파일 )이 생성된다.
 
-Decorator에서 request하지 않으면 NestJS는 아무것도 returng하지 않는다.
+Decorator에서 필요한 parameter를 request하지 않으면 NestJS는 아무것도 returng하지 않는다.
+
+---
+
+Single-responsibility principle : 하나의 module, class, function이 하나의 기능은 꼭 책임져야 한다.
+Service : 로직을 관리하는 역할.
+
+CLI 입력 : nest generate service || nest g s
