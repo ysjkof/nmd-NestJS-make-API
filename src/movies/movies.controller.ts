@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -30,8 +31,14 @@ export class MoviesController {
   // getOne에게 필요한 게 있어서 요청한다. URL에 파라미터 id를 찾고 싶다. @Param()으로 id를 요청한다.
   // NestJS는 요청하지 않으면 아무것도 return하지 않는다.
   getOne(@Param('id') movieId: string): Movie {
-    return this.moviesService.getOne(movieId);
+    const movie = this.moviesService.getOne(movieId);
+    if (!movie) {
+      // NestJS 내장 기능.
+      throw new NotFoundException(`Movie with ID ${movieId} not found.`);
+    }
+    return movie;
   }
+
   @Post()
   // @Body는 request의 body를 가져온다.
   create(@Body() movieDate) {
@@ -46,9 +53,6 @@ export class MoviesController {
   // update 기능. put은 모든 리소스를 업데이트 한다. patch는 리소스의 일부만 업데이트한다.
   @Patch(':id')
   patch(@Param('id') movieId: string, @Body() updateData) {
-    return {
-      updatedMovie: movieId,
-      ...updateData,
-    };
+    return this.moviesService.update(movieId, updateData);
   }
 }
