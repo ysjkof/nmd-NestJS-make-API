@@ -12,14 +12,14 @@ node.js는 아무런 규칙이 없어 사용자가 하고 싶은 대로 아무�
 
 ## 강의 내용
 
-## NestJS로 REST API를 만들고 테스트 한다..
+NestJS로 REST API를 만들고 테스트 한다..
 
-## insomnia
+### insomnia
 
 https://insomnia.rest/
 Rest client. 이걸로 우리의 엔드포인트를 테스트할 것.
 
-## NestJS 설치
+### NestJS 설치
 
 `npm i -g @nestjs/cli`
 설치 후 터미널에서 `nest` 입력하면 사용할 수 있는 명령어를 보여준다.
@@ -27,16 +27,16 @@ Rest client. 이걸로 우리의 엔드포인트를 테스트할 것.
 ---
 
 controller : express의 router 같은 것. URL가져오고 함수를 실행. request를 받고, query나 body 등을 넘기는 역할.
-CLI 입력 : nest generate controller || nest g co => 이름을 입력하면 컨트롤러와 spec( 테스트 파일 )이 생성된다.
+CLI 입력 : `nest generate controller` || `nest g co` => 이름을 입력하면 컨트롤러와 spec( 테스트 파일 )이 생성된다.
 
-Decorator에서 필요한 parameter를 request하지 않으면 NestJS는 아무것도 returng하지 않는다.
+Decorator에서 필요한 parameter를 request하지 않으면 NestJS는 아무것도 return하지 않는다.
 
 ---
 
 Single-responsibility principle : 하나의 module, class, function이 하나의 기능은 꼭 책임져야 한다.
 Service : 로직을 관리하는 역할.
 
-CLI 입력 : nest generate service || nest g s
+CLI 입력 : `nest generate service` || `nest g s`
 express.js에서 하듯 수동으로 import하지 않는다.
 
 ---
@@ -52,10 +52,18 @@ main.ts에 설정함. `app.useGlobalPipes( new ValidationPipe())`
 
 app.module은 AppController와 AppProvider만 가지고 있어야 한다.
 Movies의 모듈과 컨트롤러는 movies.module로 옮긴다.
-CLI 입력 : nest generate module || nest g mo
+CLI 입력 : `nest generate module` || `nest g mo`
 
 그럼 AppController와 Provider는 언제 쓰나?
-CLI 입력 : nest generate module || nest g co
+CLI 입력 : `nest generate controller` || `nest g co`
 이름을 app로 하면 만들어짐.
 
 ---
+
+### 테스트
+
+.spac.ts 파일은 테스트를 포함한 파일이다. 유닛테스트가 목적이다.
+spac파일에는 beforeEach가 기본으로 있다. 그리고 afterAll은 테스트 후 DB를 모두 지워줄 수 있다.
+
+유닛 테스트 : 펑션 하나를 테스트.
+e2e( end - to - end ): 모든 시스템을 테스트.
