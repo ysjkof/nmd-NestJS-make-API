@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Patch,
   Post,
@@ -33,12 +32,7 @@ export class MoviesController {
   // getOne에게 필요한 게 있어서 요청한다. URL에 파라미터 id를 찾고 싶다. @Param()으로 id를 요청한다.
   // NestJS는 요청하지 않으면 아무것도 return하지 않는다.
   getOne(@Param('id') movieId: number): Movie {
-    const movie = this.moviesService.getOne(movieId);
-    if (!movie) {
-      // NestJS 내장 기능.
-      throw new NotFoundException(`Movie with ID ${movieId} not found.`);
-    }
-    return movie;
+    return this.moviesService.getOne(movieId);
   }
 
   @Post()
